@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fang.bookshop.dao.UserDao">
+	<insert id="addUser" parameterType="com.fang.bookshop.entity.User" >
+	 insert into user(userName,dept,grade,tel,address ) values(#{userName},#{dept},#{grade},#{tel},#{address})
+	</insert>
+	
+	<select id="queryUsers" resultType="com.fang.bookshop.entity.User">
+	   select * from user
+	</select>
+	
+
+	<select id="search"  resultType="com.fang.bookshop.entity.User">
+	 select * from user
+    <where>
+          <if test="userId!=null">
+          and userId=#{userId}
+          </if>
+    </where>
+    </select>
+    
+	
+ <update id="editUser" parameterType="com.fang.bookshop.entity.User">
+ update user set userName=#{userName},dept=#{dept},grade=#{grade},
+    tel=#{tel},address=#{address} where userId=#{userId}
+</update>
+
+  <delete id="deleteUser" parameterType="String">
+	    delete from user where userId=#{userId}
+</delete>
+</mapper>

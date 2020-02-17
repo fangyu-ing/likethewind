@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fang.bookshop.dao.LendDao">
+	<insert id="lend" parameterType="com.fang.bookshop.entity.Lend" >
+	 insert into lendmanage(bookId,userId,lendDate,returnDate,isReturn) values(#{bookId},#{userId},#{lendDate},#{returnDate},#{isReturn})
+	</insert>
+	
+	<select id="queryLends" resultType="com.fang.bookshop.entity.Lend">
+	   select * from lendmanage
+	</select>
+	<delete id="retrun" parameterType="com.fang.bookshop.entity.Lend">
+	    delete from lendmanage where bookId=#{bookId} and userId=#{userId}
+    </delete>
+	<select id="searchStock"  resultType="Integer">
+	 select stock from bookinfo where bookId=#{bookId}
+    </select>
+    <update id="updateStock1" parameterType="String">
+     update bookinfo set stock=stock-1  where bookId=#{bookId}
+    </update>
+    <update id="updateStock2" parameterType="String">
+     update bookinfo set stock=stock+1  where bookId=#{bookId}
+    </update>
+
+</mapper>
